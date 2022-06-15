@@ -5,7 +5,7 @@ This is an app which can be used in shipping companies to help with their stock 
 I am currently studying online for two years and a half due to the strict COVID control in China.
 It is a tough time (I guess you feel that too) and one of the problems we face is getting Chinese textbooks for our lectures.
 We usually buy the textbooks from Alibaba Taobao and it also provides shipping option.
-However, the cost is quite high and we have to seek for third-party shipping company.
+However, the cost is quite high and we have to seek for third-party shipping company for better price.
 
 At that time, my SQL course required us to build a project tackling some databases. And that's what made this project happen.
 We chose a shipping company website that we frequently use for our shipping needs and figured out the process underneath from a client's perspective.
