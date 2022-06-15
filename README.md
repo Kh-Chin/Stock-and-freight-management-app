@@ -9,7 +9,7 @@ However, the cost is quite high and we have to seek for third-party shipping com
 
 At that time, my SQL course required us to build a project tackling some databases. And that's what made this project happen.
 We chose a shipping company website that we frequently use for our shipping needs and figured out the process underneath from a client's perspective.
-We managed to develop and imitate some of the functions the website provides, and gave the app some nice look (Heads off to people who learns designs).
+We managed to develop and imitate some of the functions the website provides, and gave the app some nice look (Heads off to the people who learn designs).
 
 ## Skillset
 We Used Python Kivy and KivyMD module for front-end development, Python as back-end language, and SQL Server as database.
