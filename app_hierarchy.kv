@@ -1,0 +1,58 @@
+#:import utils kivy.utils
+#:import Factory kivy.factory.Factory
+#:include pages.kv
+#:include style.kv
+#:include widgets.kv
+# Color hex code can be found on https://www.colorhexa.com/
+
+# App hierarchy
+MainScreen:
+    MDBoxLayout:
+        orientation:"vertical"
+        size_hint: None,None
+        size: root.width, root.height
+        canvas.before:
+            Color:
+                rgba:(0.929,0.929,0.929,1)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Header:
+            id: Header
+        Widget:
+            size_hint: 1, None
+            height: "30dp"
+        MDBoxLayout:
+            Widget:
+                size_hint: 0.2,1
+            Left_Panel:
+                id: Left_Panel
+                size_hint: 0.3,1
+            Widget:
+                size_hint: 0.05,1
+            App_Screen:
+                id:App_Screen
+                canvas.before:
+                    Color:
+                        rgba:(0.929,0.929,0.929,1)
+                    RoundedRectangle:
+                        size: self.size
+                        pos: self.pos
+                HomePage:
+                    id:HomePage
+                SignUpPage:
+                    id:SignUpPage
+                UserInfoPage:
+                    id:UserInfoPage
+                EmployeeInfoPage:
+                    id:EmployeeInfoPage
+                PricePage:
+                    id:PricePage
+                CheckParcelPage:
+                    id:CheckParcelPage
+                CalculatePage:
+                    id:CalculatePage
+                LogisticsPage:
+                    id:LogisticsPage
+            Widget:
+                size_hint: 0.2,1

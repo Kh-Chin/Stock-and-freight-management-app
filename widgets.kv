@@ -1,0 +1,223 @@
+# This file is for defining widgets used in pages and app.
+
+
+# PopUp
+
+<LoginWindow@AppPopup>:
+    # Login Window for user and employees
+    id: LoginWindow
+    title:"User Login"
+    employee: False
+    on_open: app.root.MyPopUp=self
+    PopUpLayout:
+        MDIcon:
+            icon: 'account'
+            theme_text_color:'Custom'
+            text_color:(1,1,1,1)
+            halign: 'center'
+            font_size: 100
+        PopUpTextField:
+            id: Login_user
+            icon_left: "account-check"
+            hint_text: "用户名"
+        PopUpTextField:
+            id: Login_password
+            icon_left: "key-variant"
+            hint_text: "密码"
+            password: True
+        LoginWindowButton:
+            id: LoginButton
+            text: "登入"
+            on_release:
+                app.login(Login_user.text, Login_password.text, LoginWindow.employee)
+                root.dismiss()
+        LoginWindowButton:
+            id: ChangeButton
+            text: "我是员工"
+            on_release:
+                self.text = "我是员工" if LoginWindow.employee else "我是会员"
+                LoginWindow.title = "User Login" if LoginWindow.employee else "Employee Login"
+                LoginWindow.employee = not LoginWindow.employee
+
+<Parcel_In_Window@AppPopup>:
+    # A popup window that helps key in the parcel information
+    id: Parcel_In_Window
+    on_open: app.root.Parcel_In_Window=self
+    title:"Create Parcel"
+    PopUpLayout:
+        MDIcon:
+            icon: 'dropbox'
+            theme_text_color:'Custom'
+            text_color:(1,1,1,1)
+            halign: 'center'
+            font_size: 180
+        PopUpTextField:
+            id: Parcel_No
+            icon_left: "arrow-right-bold-box"
+            hint_text: "输入快递单号"
+        PopUpTextField:
+            id: Parcel_Name
+            icon_left: "arrow-right-bold-box"
+            hint_text: "输入包裹名称"
+        SubmitButton:
+            text: "提交"
+            on_press: app.key_in_parcel(Parcel_No.text,Parcel_Name.text)
+
+<Employee_Parcel_In_Window@AppPopup>:
+    # A window for employee to key in parcels
+    id: Employee_Parcel_In_Window
+    size_hint: 0.5, 0.8
+    on_open: app.root.Employee_Parcel_In_Window=self
+    title:"Key In Parcel"
+    PopUpLayout:
+        MDIcon:
+            icon: 'dropbox'
+            theme_text_color:'Custom'
+            text_color:(1,1,1,1)
+            halign: 'center'
+            font_size: 80
+        PopUpTextField:
+            id: EParcel_No
+            icon_left: "arrow-right-bold-box"
+            hint_text: "输入快递单号"
+        PopUpTextField:
+            id: EParcel_Weight
+            icon_left: "arrow-right-bold-box"
+            hint_text: "输入包裹重量"
+        PopUpTextField:
+            id: EParcel_Rack
+            icon_left: "arrow-right-bold-box"
+            hint_text: "输入货架号"
+        SubmitButton:
+            text: "提交"
+            on_press: app.employee_key_in_parcel(EParcel_No.text,EParcel_Weight.text,EParcel_Rack.text)
+
+<OrderPopup@AppPopup>:
+    # Pop up window for employee to key in the packing details
+    title:"Pack Order"
+    PopUpLayout:
+        PopUpTextField:
+            id: EOrder_Weight
+            icon_left: "arrow-right-bold-box"
+            hint_text: "输入订单重量(kg)"
+        PopUpTextField:
+            id: EOrder_Length
+            icon_left: "arrow-right-bold-box"
+            hint_text: "输入订单长度(cm)"
+        PopUpTextField:
+            id: EOrder_Width
+            icon_left: "arrow-right-bold-box"
+            hint_text: "输入订单宽度(cm)"
+        PopUpTextField:
+            id: EOrder_Height
+            icon_left: "arrow-right-bold-box"
+            hint_text: "输入订单高度(cm)"
+        SubmitButton:
+            text: "提交"
+            on_press:
+                app.pack_order(EOrder_Weight.text,EOrder_Length.text,EOrder_Width.text,EOrder_Height.text);
+                root.dismiss();
+
+
+# Header
+
+<Header@MDBoxLayout>:
+    # Header List with Logo and Functional Button
+    canvas.before:
+        Color:
+            rgba:(1,1,1,1)
+        Rectangle:
+            size:self.size
+            pos:self.pos
+    orientation: "horizontal"
+    size_hint: 1, None
+    height: "100dp"
+    Widget:
+        size_hint: 0.2, 1
+    LogoPlacer:
+        size_hint: 0.1, 1
+    Widget:
+        size_hint: 0.5, 1
+    StackLayout:
+        id:HeaderFunctionList
+        padding: "20dp", "10dp", "20dp", "10dp"
+        orientation: "lr-tb"
+        spacing:"10dp"
+        HeaderButton:
+            id: HeaderPricePageButton
+            text: "运费价格"
+            on_release: app.root.ids.App_Screen.current = "PricePage"
+        HeaderButton:
+            id: HeaderLogisticsPageButton
+            text: "订单查询"
+            on_release:
+                app.root.ids.LogisticsPage.ids.OrderList.clear_widgets()
+                app.root.ids.LogisticsPage.ids.OrderListButtonHolder1.clear_widgets()
+                app.root.ids.LogisticsPage.ids.OrderListButtonHolder2.clear_widgets()
+                app.load_order()
+                app.root.ids.App_Screen.current = "LogisticsPage"
+        HeaderButton:
+            id: HeaderSignUpButton
+            text: "注册账号"
+            on_release: app.root.ids.App_Screen.current = "SignUpPage"
+        HeaderButton:
+            id: HeaderLoginButton
+            text: "用户登录"
+            on_press: app.login_button = self.__self__
+            on_release: Factory.LoginWindow().open()
+    Widget:
+        size_hint: 0.1, 1
+
+
+# Left Panel
+
+<Left_Panel@BoxLayout>:
+    # Function lists displayed on the left side of the screen
+    MDList:
+        canvas.before:
+            Color:
+                rgba:(0.8,0.8,0.8,1)
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+        bg_color:(1,1,1,1)
+        pos_hint: {"top": 1}
+        LeftPanelListItem:
+            text: "Key In Parcel"
+            on_release:
+                if app.connection_type == "Employee": Factory.Employee_Parcel_In_Window().open();
+                if app.connection_type == "User": Factory.Parcel_In_Window().open();
+        LeftPanelListItem:
+            text: "Calculate Price"
+            on_release: app.root.ids.App_Screen.current = "CalculatePage"
+        LeftPanelListItem:
+            text: "Check Parcel"
+            on_release:
+                app.root.ids.CheckParcelPage.ids.ParcelList.clear_widgets()
+                app.load_parcel()
+                app.root.ids.App_Screen.current = "CheckParcelPage"
+
+
+# Holders
+
+<LogoPlacer@AnchorLayout>:
+    # Logo Holder
+    Button:
+        background_color: 0,0,0,0
+        on_release: app.root.ids.App_Screen.current = "HomePage"
+        Image:
+            source: "Image/MKLOGO.png"
+            allow_stretch: True
+            keep_ratio: True
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+
+<MiddleButtonHolder@AnchorLayout>:
+    pos_hint:{"center_x":0.5,"center_y":0.5}
+    size_hint: 1, None
+    height: "45dp"
+
+
+# Checkbox
+
+<Checkbox@ILeftBodyTouch, MDCheckbox>:

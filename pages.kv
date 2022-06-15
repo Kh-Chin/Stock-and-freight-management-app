@@ -1,0 +1,228 @@
+# This file is for defining app pages and screens
+
+
+<App_Screen@ScreenManager>:
+
+<MainScreen@Screen>:
+
+<HomePage@Screen>:
+    # Home Page
+    name: "HomePage"
+    Content:
+        Image:
+            source: "Image/HomepageImage2.png"
+            allow_stretch: True
+            keep_ratio: True
+
+<PricePage@Screen>:
+    # Page for displaying price
+    name: "PricePage"
+    on_pre_enter: app.load_price()
+    Content:
+        id: PricePageContent
+        PageTitle:
+            text:"运费价格查询"
+        CenterLabel:
+            text:"海运小包"
+        BoxLayout:
+            id: SmallPackPriceHolder
+        CenterLabel:
+            text:"海运大货"
+        BoxLayout:
+            id: BigPackPriceHolder
+
+<SignUpPage@Screen>:
+    # Sign up page
+    name: "SignUpPage"
+    Content:
+        id: SignUpPageContent
+        PageTitle:
+            text: "注册账号"
+        GridLayout:
+            size_hint: 0.8, 1
+            pos_hint:{"center_x":0.5,"top":0.1}
+            spacing: "10dp"
+            padding:"20dp"
+            cols: 1
+            SignUpTextRequired:
+                hint_text: "Username"
+                id: SignUp_Username
+            SignUpTextRequired:
+                hint_text: "Password"
+                id: SignUp_Pwd
+            SignUpTextRequired:
+                hint_text: "Email"
+                id: SignUp_Email
+            SignUpTextRequired:
+                hint_text: "Receiver Name"
+                id: SignUp_Receiver
+            SignUpTextRequired:
+                hint_text: "Telephone"
+                id:SignUp_Telephone
+            SignUpTextRequired:
+                hint_text: "Address"
+                id: SignUp_Address
+            SubmitButton:
+                text: "提交"
+                on_press: app.sign_up(SignUp_Username.text, SignUp_Pwd.text, SignUp_Email.text, SignUp_Receiver.text, SignUp_Telephone.text, SignUp_Address.text)
+
+<UserInfoPage@Screen>:
+    # Page that display user info
+    name: "UserInfoPage"
+    Content:
+        PageTitle:
+            text:"我的资料"
+        ScrollView:
+            GridLayout:
+                size_hint_y:None
+                height:self.minimum_height
+                spacing: "15dp"
+                padding:"20dp"
+                cols: 1
+                UserLabel:
+                    id: UserInfoMno
+                    text:"User ID:"
+                UserLabel:
+                    id: UserInfoUsername
+                    text:"Username:"
+                SignUpTextRequired:
+                    id: UserInfo_Email
+                    hint_text: "Email"
+                SignUpTextRequired:
+                    id: UserInfo_Receiver
+                    hint_text: "Receiver Name"
+                SignUpTextRequired:
+                    id:UserInfo_Telephone
+                    hint_text: "Telephone"
+                SignUpTextRequired:
+                    id: UserInfo_Address
+                    hint_text: "Address"
+                SignUpTextRequired:
+                    id: UserInfo_Address1
+                    hint_text: "Other Address 1"
+                    required: False
+                SignUpTextRequired:
+                    id: UserInfo_Address2
+                    hint_text: "Other Address 2"
+                    required: False
+                SignUpTextRequired:
+                    id: UserInfo_Password
+                    hint_text: "Change Password(optional)"
+                    password: True
+                    required: False
+                SignUpTextRequired:
+                    id: UserInfo_ConfirmPassword
+                    hint_text: "Confirm Password"
+                    password: True
+                    required: False
+                MiddleButtonHolder:
+                    SubmitButton:
+                        text: "更新资料"
+                        on_press: app.renew_info(UserInfo_Email.text, UserInfo_Receiver.text, UserInfo_Telephone.text, UserInfo_Address.text, UserInfo_Address1.text, UserInfo_Address2.text, UserInfo_Password.text, UserInfo_ConfirmPassword.text)
+                MiddleButtonHolder:
+                    SubmitButton:
+                        text: "登出"
+                        on_press: app.log_out()
+
+
+<EmployeeInfoPage@Screen>:
+    # Page that display employee info
+    name: "EmployeeInfoPage"
+    Content:
+        id: EmployeeInfoPageContent
+        PageTitle:
+            text:"我的资料"
+        GridLayout:
+            size_hint: 0.8, 1
+            pos_hint:{"center_x":0.5,"top":0.1}
+            spacing: "15dp"
+            padding:"20dp"
+            cols: 1
+            UserLabel:
+                id: EmployeeInfoEno
+                text:"User ID:"
+            UserLabel:
+                id: EmployeeInfoUsername
+                text:"Username:"
+            UserLabel:
+                id: EmployeeInfoEtype
+                text:"Type:"
+            MDRectangleFlatButton:
+                size_hint: None, None
+                size: "30dp","10dp"
+                pos_hint_x:0.5
+                font_name: "Font/msyh.ttf"
+                text: "登出"
+                on_press: app.log_out()
+
+<CheckParcelPage@Screen>:
+    # Page that shows all user parcel
+    name: "CheckParcelPage"
+    Content:
+        id: CheckParcelPageContent
+        PageTitle:
+            text:"包裹查询与订单创建"
+        BoxLayout:
+            id: ParcelList
+            canvas.before:
+                Color:
+                    rgba:(1,1,1,1)
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+            bg_color:(1,1,1,1)
+        MiddleButtonHolder:
+            id: ParcelListButtonHolder
+            SubmitButton:
+                id: ParcelListButton
+                text: "创建订单"
+                on_press: app.create_order()
+
+<LogisticsPage@Screen>:
+    # Display all orders
+    name: "LogisticsPage"
+    Content:
+        id: LogisticsPageContent
+        PageTitle:
+            text:"订单查询创建"
+        BoxLayout:
+            id: OrderList
+        MiddleButtonHolder:
+            id: OrderListButtonHolder1
+        MiddleButtonHolder:
+            id: OrderListButtonHolder2
+
+<CalculatePage@Screen>:
+    # A calculator page that helps calculate the order price
+    name: "CalculatePage"
+    Content:
+        GridLayout:
+            cols: 2
+            spacing: "20dp"
+            LeftLabel:
+                text: "重量(KG): "
+            MathInput:
+                id: Weight
+            LeftLabel:
+                text: "长度(cm): "
+            MathInput:
+                id: Length
+            LeftLabel:
+                text: "宽度(cm): "
+            MathInput:
+                id: Width
+            LeftLabel:
+                text: "高度(cm): "
+            MathInput:
+                id: Height
+            LeftLabel:
+                text: "海运小包(RMB): "
+            RightLabel:
+                id: Fee1
+            LeftLabel:
+                text: "海运大货(RMB): "
+            RightLabel:
+                id: Fee2
+        SubmitButton:
+            text: "Submit"
+            on_press: app.calculate(Weight.text,Length.text,Width.text,Height.text)

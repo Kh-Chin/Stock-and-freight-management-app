@@ -1,0 +1,157 @@
+# This file is used to configure some style for widgets.
+
+
+# Button
+
+<AllButton@Button>:
+    # Style for all common buttons
+    color:(0,0,0,1)
+    font_size: "25dp"
+    font_name: "Font/msyh.ttf"
+    background_normal: ""
+    background_color: (0, 0, 0, 0)
+
+<HeaderButton@AllButton>:
+    # Style for header button
+    size_hint: None, 1
+    width: "130dp"
+
+<LoginWindowButton@MDFillRoundFlatButton>:
+    # Style configuration for buttons in Login Window
+    font_name: "Font/msyh.ttf"
+    font_size: 15
+    pos_hint: {"center_x": 0.5}
+
+<SubmitButton@MDRectangleFlatButton>:
+    # Style configuration for submit button
+    size_hint: None, None
+    size: "20dp","10dp"
+    pos_hint:{"center_x":0.5,"center_y":0.5}
+    font_name: "Font/msyh.ttf"
+
+
+# Label
+
+<AllLabel@Label>:
+    # Style for all labels
+    font_size: "32dp"
+    font_name: "Font/msyh.ttf"
+    background_color: (1, 1, 1, 1)
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<LeftLabel@AllLabel>:
+    # Style for labels aligning left
+    halign: "left"
+    color: 0,0,0,1
+    background_color: (1, 1, 1, 0)
+    font_size: "24dp"
+
+<RightLabel@AllLabel>:
+    # Style for labels aligning right
+    halign: "right"
+    color: 0,0,0,1
+    background_color: (1, 1, 1, 0)
+
+<CenterLabel@MDLabel>:
+    halign: "center"
+    font_name: "Font/msyh.ttf"
+    color: 0,0,0,1
+    font_size: "20dp"
+    size_hint: (1, 0.2)
+
+<UserLabel@MDLabel>:
+    # Style configuration for label which shows user info
+    halign:"left"
+    font_size: "20dp"
+    size_hint_y: None
+    height: "20dp"
+
+<PageTitle@MDLabel>:
+    # Style configuration for page title
+    id: PageTitle
+    size_hint: None, None
+    width: "500dp"
+    height: "40dp"
+    pos_hint:{"x":0,"y":1}
+    font_name:"Font/msyh.ttf"
+    font_size: 25
+
+
+# Text Field
+
+<AllTextInput@TextInput>:
+    # Style for all text input
+    font_size: "32dp"
+    font_name: "Font/msyh.ttf"
+    multiline: False
+    background_color: utils.get_color_from_hex("#f9f9f9")
+
+<MathInput@AllTextInput>:
+    # Style for integer input
+    background_color: (1, 1, 1, 0)
+    pos: self.pos
+    background_color: utils.get_color_from_hex("#ffffff")
+
+<PopUpTextField@MDTextFieldRound>:
+    # Style for text fields in popup window
+    font_name: "Font/msyh.ttf"
+    color_active: 0.85,0.85,0.85,1
+    foreground_color: 0, 0, 0, 1
+    size_hint_x: None
+    width: 220
+    font_size: 20
+    pos_hint: {"center_x": 0.5}
+    required: True
+
+<SignUpTextRequired@MDTextField>:
+    # Style configuration for text field
+    mode:"rectangle"
+    required: True
+    helper_text_mode: "on_error"
+    helper_text: "This field is required"
+
+
+# List item
+
+<LeftPanelListItem@OneLineAvatarListItem>:
+    # Style configuration for every list item in the left panel
+    font_name: "Font/msyh.ttf"
+    divider:"Inset"
+    IconLeftWidget:
+        icon: "language-python"
+
+
+# Content
+
+<Content@BoxLayout>:
+    # Style configuration for page content
+    padding:"30dp"
+    orientation:"vertical"
+    size_hint: 1,1
+    canvas.before:
+        Color:
+            rgba:(1,1,1,1)
+        RoundedRectangle:
+            size:self.size
+            pos:self.pos
+
+
+# Popup
+
+<AppPopup@Popup>:
+    # Style configuration for all Popup Window
+    auto_dismiss: True
+    size_hint: 0.4, 0.7
+    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+<PopUpLayout@BoxLayout>:
+    # Style configuration for all Popup Widget
+    pos_hint: {"center_x": 0.5, "center_y": 0.5}
+    padding: 35
+    spacing: 25
+    orientation: 'vertical'
