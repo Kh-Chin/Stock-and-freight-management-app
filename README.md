@@ -2,25 +2,21 @@
 This is an app which can be used in shipping companies to help with their stock and freight management.
 
 ## Introduction
-I am currently studying online for two years and a half due to the strict COVID control in China.
-It is a tough time (I guess you feel that too) and one of the problems we face is getting Chinese textbooks for our lectures.
-We usually buy the textbooks from Alibaba Taobao and it also provides shipping option.
-However, the cost is quite high and we have to seek for third-party shipping company for better price.
+I studied in Harbin Institute of Technology, China. When I was studying online due to COVID, one of the problems I faced was getting Chinese textbooks for our lectures.
+We usually bought the textbooks from Alibaba Taobao and sought for third-party shipping company for overseas logistics.
 
-At that time, my SQL course required us to build a project tackling some databases. And that's what made this project happen.
-We chose a shipping company website that we frequently use for our shipping needs and figured out the process underneath from a client's perspective.
-We managed to develop and imitate some of the functions the website provides, and gave the app some nice look (Heads off to the people who learn designs).
+So, when my SQL course required us to build a project, we chose a shipping company website that we frequently use and figured out the process underneath from a client's perspective. We managed to develop and imitate some functions of the website, including front-end, back-end and database, and designed the app layout by ourselves.
 
 ## Skillset
-We Used Python Kivy and KivyMD module for front-end development, Python as back-end language, and SQL Server as database.
+We used Python Kivy and KivyMD module for front-end development, Python as back-end language, and SQL Server as database.
 
-Developed a few functions:
+We Developed a few functions:
 1) Login (for both clients' and workers' side)
-2) Create user accounts
+2) Creating user accounts
 3) Information display (including user information, price information, parcel information, etc)
-4) Key in parcels
-5) Create an order
-6) Collect parcels in an order
+4) Parcels information entry
+5) Creating an order
+6) Collecting parcels in an order
 7) Shipping fee calculation
 
 ## Showcase
